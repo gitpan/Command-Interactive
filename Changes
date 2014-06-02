@@ -1,0 +1,4 @@
+Command::Interactive
+
+0.02    03/06/2014
+        Fixing make test errors when locale is not C or English
