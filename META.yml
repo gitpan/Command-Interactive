@@ -17,4 +17,4 @@ name: Command-Interactive
 requires:
   Expect: 0
   Moose: 0
-version: 0.2
+version: 0.3
