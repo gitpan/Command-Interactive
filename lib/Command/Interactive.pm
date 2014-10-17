@@ -4,7 +4,7 @@ package Command::Interactive;
 use strict;
 use warnings;
 
-our $VERSION = '0.3';
+our $VERSION = 1.1;
 
 use Moose;
 

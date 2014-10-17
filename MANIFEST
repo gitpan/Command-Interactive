@@ -1,14 +1,8 @@
-Changes
-LICENSE
-MANIFEST
-META.yml
-Makefile.PL
-README
-README.md
-dist.ini
-lib/Command/Interactive.pm
 lib/Command/Interactive/Interaction.pm
-pull_request.txt
+lib/Command/Interactive.pm
+Makefile.PL
+MANIFEST
+README.md
 t/001.t
 t/basic.t
 t/interaction.t
@@ -16,3 +10,5 @@ t/password.t
 t/pathological.t
 t/regex.t
 t/system_only.t
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

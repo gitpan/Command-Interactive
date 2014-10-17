@@ -1,55 +1,38 @@
-
+use 5.006;
 use strict;
-use warnings;
+use warnings FATAL => 'all';
+use ExtUtils::MakeMaker;
 
-
-
-use ExtUtils::MakeMaker 6.30;
-
-
-
-my %WriteMakefileArgs = (
-  "ABSTRACT" => "handles interactive (and non-interactive) process invocation",
-  "AUTHOR" => "Binary.com <perl\@binary.com>",
-  "BUILD_REQUIRES" => {
-    "Test::Exception" => 0,
-    "Test::NoWarnings" => 0
-  },
-  "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30"
-  },
-  "DISTNAME" => "Command-Interactive",
-  "EXE_FILES" => [],
-  "LICENSE" => "perl",
-  "NAME" => "Command::Interactive",
-  "PREREQ_PM" => {
-    "Expect" => 0,
-    "Moose" => 0
-  },
-  "VERSION" => "0.3",
-  "test" => {
-    "TESTS" => "t/*.t"
-  }
+WriteMakefile(
+    NAME             => 'Command::Interactive',
+    AUTHOR           => q{binary.com <perl@binary.com>},
+    VERSION_FROM     => 'lib/Command/Interactive.pm',
+    ABSTRACT_FROM    => 'lib/Command/Interactive.pm',
+    LICENSE          => 'Artistic_2_0',
+    PL_FILES         => {},
+    MIN_PERL_VERSION => 5.006,
+    CONFIGURE_REQUIRES => {
+        'ExtUtils::MakeMaker' => 0,
+    },
+    BUILD_REQUIRES => {
+        'Test::NoWarnings' => 0,
+        'Test::Exception' => 0,
+    },
+    PREREQ_PM => {
+        'Moose'      => 0,
+        'Expect'      => 0,
+      },
+    dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
+    clean => { FILES => 'Command-Interactive-*' },
+    (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
+        'meta-spec' => { version => 2 },
+            resources => {
+                repository => {
+                    type => 'git',
+                    url => 'https://github.com/binary-com/perl-command-interactive.git',
+                    web => 'https://github.com/binary-com/perl-command-interactive',
+                  },
+            }})
+     : ()
+    ),
 );
-
-
-unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
-  my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};
-  my $pp = $WriteMakefileArgs{PREREQ_PM};
-  for my $mod ( keys %$br ) {
-    if ( exists $pp->{$mod} ) {
-      $pp->{$mod} = $br->{$mod} if $br->{$mod} > $pp->{$mod};
-    }
-    else {
-      $pp->{$mod} = $br->{$mod};
-    }
-  }
-}
-
-delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
-  unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
-
-WriteMakefile(%WriteMakefileArgs);
-
-
-
