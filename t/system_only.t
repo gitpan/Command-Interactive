@@ -16,6 +16,6 @@ setlocale(LC_ALL, 'en');
 my $command = Command::Interactive->new;
 
 is($command->run("echo yes"), undef, "Run command successfully");
-is($command->run("asdfasdf"), 'Could not execute asdfasdf: No such file or directory', "Bogus command");
+like($command->run("asdfasdf"), qr/Could not execute asdfasdf/, "Bogus command");
 
 1;
